@@ -70,13 +70,13 @@ class QueryResponse(BaseModel):
 # --- API ENDPOINTS ---
 
 # NEW: Add a root endpoint for the base URL
-@app.get("/")
+@app.get("/hackerx/run")
 def read_root():
     """A default endpoint for the root URL."""
     return {"message": "Smart Document Query API is active."}
 
 
-@app.post("/process/", response_model=ProcessResponse, dependencies=[Security(get_api_key)])
+@app.post("hackerx/run/process", response_model=ProcessResponse, dependencies=[Security(get_api_key)])
 async def process_document(file: UploadFile = File(...)):
     """
     Upload a document (PDF or DOCX), process it, and store its embeddings.
@@ -115,7 +115,7 @@ async def process_document(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=f"An error occurred during processing: {str(e)}")
 
 
-@app.post("/query/", response_model=QueryResponse, dependencies=[Security(get_api_key)])
+@app.post("hackerx/run/query", response_model=QueryResponse, dependencies=[Security(get_api_key)])
 async def query_document(request: QueryRequest):
     """
     Ask a question about a previously processed document.
