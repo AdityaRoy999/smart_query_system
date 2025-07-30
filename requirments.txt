@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+python-multipart
+numpy
+python-docx
+requests
+PyPDF2>=3.0.0
